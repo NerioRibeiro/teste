@@ -1,0 +1,372 @@
+{
+    "liveServer.settings.port": 5501
+}
+para copiar
+
+
+/////////////////////////////////////////////
+
+index.html
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <title>Decodificador</title>
+</head>
+
+<body>
+
+    <header class="nav">
+        <img src="./img/Logo Amara (2).png" alt="Logo Amara Comunicação e Tecnologia">
+    </header>
+    <main>
+        <section>
+            <textarea class="input-text" id="entrada" cols="40" rows="6" placeholder="digite o seu texto"></textarea>
+
+            <div class="information">
+
+                <h6 class="text">❗Apenas letras maiúsculas e minúsculas</h6>
+            </div>
+            <div class="button">
+                <button class="encriptor" onclick="btnEncriptar()">
+                    <p>Criptografar</p>
+                </button>
+
+                <button class="descriptor" onclick="btnDesencriptar()">
+                    <p>Descriptografar</p>
+                </button>
+
+                <!--inserido pelo atalho .botoes-->
+            </div>
+        </section>
+
+        <section class="output">
+            <div>
+                <textarea class="mensage" id="msgoutput" cols="18" rows="8"
+                    placeholder="       Nenhuma mensagem encontrada.       Digite um texto que você quer criptografar ou descriptogafar."></textarea>
+            </div>
+
+            <section class="btnCopyClear">
+
+                <button class="btnCopyText" onclick="btnCopy()">Copiar</button>
+
+                <button class="btnClearText" onclick="btnClear()">
+                    Limpar
+                </button>
+            </section>
+
+        </section>
+    </main>
+
+    <footer class="author">
+        <a href = "https://www.linkedin.com/in/jaqueline-de-almeida/" target="_blank"><img src="./img/icons8-linkedin-circundado-100.png" alt="icone linkedin"></a> 
+        <a href ="https://github.com/jaquelinedealmeida" target="_blank"><img src="./img/icons8-github-100.png" alt="icone github"></a> 
+        <p>© Criado por Jaqueline de Almeida | 2022</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+//////////////////////////////////////////////
+
+script.js
+
+const inputText = document.querySelector(".input-text");
+const mensage = document.querySelector(".mensage");
+
+function btnEncriptar() {
+  const textoEncriptado = encriptar(inputText.value);
+  mensage.value = textoEncriptado;
+  mensage.style.backgroundImage = "none";
+
+  if (textoEncriptado == false) {
+    alert("Você precisa digitar o texto antes.");
+  }
+}
+
+function encriptar(stringEncriptada) {
+  let matrizCodigo = [
+    ["e", "enter"],
+    ["i", "imes"],
+    ["a", "ai"],
+    ["o", "ober"],
+    ["u", "ufat"],
+  ];
+  stringEncriptada = stringEncriptada.toLowerCase();
+
+  for (let i = 0; i < matrizCodigo.length; i++) {
+    if (stringEncriptada.includes(matrizCodigo[i][0])) {
+      stringEncriptada = stringEncriptada.replaceAll(
+        matrizCodigo[i][0],
+        matrizCodigo[i][1]
+      );
+    }
+  }
+  return stringEncriptada;
+}
+
+function btnDesencriptar() {
+  const textoDesencriptado = desencriptar(inputText.value);
+  mensage.value = textoDesencriptado;
+
+  if (textoDesencriptado == false) {
+    alert("Você precisa digitar o texto antes.");
+  }
+}
+
+function desencriptar(stringDescriptada) {
+  let matrizCodigo = [
+    ["ai", "a"],
+    ["enter", "e"],
+    ["imes", "i"],
+    ["ober", "o"],
+    ["ufat", "u"],
+  ];
+  stringDescriptada = stringDescriptada;
+
+  for (let i = 0; i < matrizCodigo.length; i++) {
+    if (stringDescriptada.includes(matrizCodigo[i][0])) {
+      stringDescriptada = stringDescriptada.replaceAll(
+        matrizCodigo[i][0],
+        matrizCodigo[i][1]
+      );
+    }
+  }
+  return stringDescriptada;
+}
+
+function btnCopy() {
+  let textCopy = mensage;
+  textCopy.select();
+  alert("Texto copiado para a área de transferência!!");
+  //selectText.setSelectionRange(0, 99999); usado para seleção nos dispotivos móveis
+}
+
+function btnClear() {
+  let clearText = document.querySelector(".mensage");
+  clearText.select();
+  inputText.value = "";
+  document.querySelector(".mensage").style.display = "block";
+  inputText.value = "";
+  inputText.focus();
+  mensage.style.backgroundImage = "";
+  document.querySelector(".mensage").value = "";
+
+  if (clearText == false) {
+    alert("Opa! Você ainda não escreveu nenhuma mensagem");
+  }
+}
+
+///////////////////////////////////////
+
+style.css
+
+* {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 150%;
+    
+}
+
+header {
+ 
+   background-color: white;
+
+}
+
+.nav img {
+   width: 100px;
+   height: 100px;
+   margin-left: 15px;
+}
+
+body {
+    background-color:rgb(8, 67, 95);
+    width: 100%;
+    margin: 0%;
+    box-sizing: border-box;
+    
+}
+
+main {
+    display: flex;
+    margin-left: 80px;
+    margin-bottom: 50px; 
+}
+
+.input-text {
+    margin-top: 180px;
+    margin-left: 30px;
+    background-color:rgb(8, 67, 95);
+    border-color: transparent;
+    color: rgb(255, 255, 255);
+   }
+
+textarea:focus, input:focus, select:focus {
+    outline: 0;
+}
+
+.information {
+    display: flex;
+ 
+}
+ 
+  
+.text {
+    font-size: 15px;
+    color: rgb(190, 222, 238);
+    font-weight: 800;
+    margin-left: 30px;
+      
+}
+
+.mensage  {
+   
+    margin-top: 50px;
+    margin-left: 60px;
+    background-image: url(./img/imgsearch.png);
+    background-position: center;
+    background-size: 350px;
+    background-position-y: 50px;
+    background-repeat: no-repeat;
+    width: 350px;
+    height:550px;
+    padding: 10px;
+    border-radius: 30px;
+    border-color: transparent;
+  
+}
+
+.mensage::placeholder {
+   color: rgb(60, 62, 66);
+   font-size: .5rem;
+   text-align: center;
+   position: absolute;
+   top:400px;
+   padding: 0 20px;
+
+}
+
+.button p {
+   font-size:16px;
+
+}
+
+.encriptor {
+   background-color: #d37509;
+   color: white;
+   width: 332px;
+   border-radius: 24px;
+   border-color: white;
+   margin-left: 30px;
+   cursor: pointer;
+       
+}
+
+.button :hover {
+   background-color: rgb(28, 133, 171);
+   
+}
+
+.button .encriptor :hover {
+    color:white;
+    border-color:rgb(28, 133, 171);
+    font-size: 17px;
+   
+  }
+
+.descriptor {
+    margin-left: 30px;
+    background-color: rgb(248, 241, 241);
+    color: #d37509;
+    border-radius: 24px;
+    width: 332px;
+    border-color: #d37509;
+    cursor: pointer;
+  }
+
+  .button .descriptor :hover {
+    color:white;
+    font-size: 17px;
+    border-color:antiquewhite
+  
+ }
+
+ .btnCopyClear {
+    display: flex; 
+    padding: .6rem;   
+ }
+
+.btnCopyText {
+   font-size:.5rem;
+   font-weight: 800px;
+   padding: .3rem; 
+   padding-left:.5rem;
+   padding-right:.5rem;
+   border-radius:.3rem;
+   justify-content:center;
+   background-color: rgb(8, 121, 156);
+   border-color: #94bff4;
+   color: #ffffff;
+   cursor: pointer;
+   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   margin-left: 4rem;
+}
+
+.btnCopyText:hover {
+   background-color: #c5642f;
+   color:#f3f5f6;
+   border-color: #c5642f;
+}
+
+.btnClearText {
+   padding-left:.5rem;
+   padding-right:.5rem;
+   font-size:.5rem;
+   font-weight: 800px;
+   border-radius:.3rem;
+   justify-content:center;
+   background-color: rgb(209, 212, 214);
+   border-color: #ffffff;
+   color: #b26207;
+   cursor: pointer;
+   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   margin-left: 10%;
+
+}
+
+.btnClearText:hover {
+   background-color: rgb(200, 225, 245);
+   color:#62747a;
+
+}
+
+.author {
+    background-color: white;
+    text-align: center;
+    padding:.4rem;
+  
+}
+
+.author img {
+   width: 1.2rem;
+   height: 1.2rem;
+   padding-bottom: 0;
+
+}
+
+.author p{
+    font-size:.5rem;
+    color: #d37509;
+    padding-top:0%;
+    line-height: 0%;
+}
