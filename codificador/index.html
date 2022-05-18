@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <title>Decodificador</title>
+</head>
+
+<body>
+
+    <header class="nav">
+        <img src="n.jpg" alt="Uma letra 'n'.">
+    </header>
+    <main>
+        <section>
+            <textarea class="input-text" id="entrada" cols="40" rows="6" placeholder="digite o seu texto"></textarea>
+
+            <div class="information">
+
+                <h6 class="text">Apenas letras <em>maiúsculas e minúsculas</em></h6>
+            </div>
+            <div class="button">
+                <button class="encriptor" onclick="btnEncriptar()">
+                    <p>Criptografar</p>
+                </button>
+
+                <button class="descriptor" onclick="btnDesencriptar()">
+                    <p>Descriptografar</p>
+                </button>
+
+                <!--inserido pelo atalho .botoes-->
+            </div>
+        </section>
+
+        <section class="output">
+            <div>
+                <textarea class="mensage" id="msgoutput" cols="18" rows="8"
+                    placeholder="       Nenhuma mensagem encontrada.       Digite um texto que você quer criptografar ou descriptogafar."></textarea>
+            </div>
+
+            <section class="btnCopyClear">
+
+                <button class="btnCopyText" onclick="btnCopy()">Copiar</button>
+
+                <button class="btnClearText" onclick="btnClear()">
+                    Limpar
+                </button>
+            </section>
+
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+<footer>
+    <h4 class="n">Nério Ribeiro da Costa</h4>
+</footer>
+
+</html>
